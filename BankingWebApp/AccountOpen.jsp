@@ -7,25 +7,18 @@
 <title>Bank</title>
 </head>
 <body>
-<%! String action; %>
-<% 
-	action= request.getAttribute("action").toString();
+	<%! String action; %>
+	<%action= request.getAttribute("action").toString();
 	if(action.equals("account")){%>
-	
 	<%="Your Account Number is : "+request.getAttribute("accountNumber") %>
 	<%="Your User Name is : "+request.getAttribute("userId") %>
 	<a href="login.html">Login</a>
-		<%		
-	} else if(action.equals("FD")) {%>
-		
+	<%} else if(action.equals("FD")) {%>
 		<%="Your Fixed Deposit Account Number is : "+request.getAttribute("accountNumber") %>
 		<a href="choice.jsp">Home</a>
-	<%
-	} else if(action.equals("RD")) {%>
-	
-	<%="Your Recurring Deposit Account Number is : "+request.getAttribute("accountNumber") %>
-	<a href="choice.jsp">Home</a>
-<%}
-%>
+	<%} else if(action.equals("RD")) { %>
+		<%="Your Recurring Deposit Account Number is : "+request.getAttribute("accountNumber") %>
+		<a href="choice.jsp">Home</a>
+	<%}%>
 </body>
 </html>
