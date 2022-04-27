@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts
+Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+
+	<package name="bank" extends="struts-default">
+
+		<interceptors>
+			<interceptor name="loanCheck" class="com.bank.interceptors.LoanCheckInterceptor"></interceptor>
+			
+		</interceptors>
+		
+		
+		<global-results>
+			<result name="login" type="redirect">login.jsp</result>
+			<result name="error">error.jsp</result>
+		</global-results>
+		
+		
+		<global-exception-mappings>
+			<exception-mapping result="error" exception="java.lang.Exception">
+			</exception-mapping>
+		</global-exception-mappings>
+		
+
+		<action name="login" class="com.bank.action.LoginAction">
+			<result name="input">login.jsp</result>
+			<result name="success" type="redirect">accountSummary</result>
+			<result name="first" type="redirect">ChangePassword.jsp</result>
+		</action>
+
+		<action name="register" class="com.bank.action.RegisterAction">
+			<result name="input">register.jsp</result>
+			<result name="success" type="redirect">AccountOpen.jsp</result>
+		</action>
+
+		<action name="accountSummary" class="com.bank.action.AccountSummaryAction" method="execute">
+			<result name="success">AccountSummary.jsp</result>
+		</action>
+
+		<action name="viewStatement" class="com.bank.action.ViewTransactionAction" method="execute">
+			<result name="success">viewTransactions.jsp</result>
+		</action>
+
+		<action name="beneList" class="com.bank.action.BeneListAction" method="execute">
+			<result name="success">beneList.jsp</result>
+		</action>
+
+		<action name="profile" class="com.bank.action.ProfileAction" method="execute">
+			<result name="success">profile.jsp</result>
+		</action>
+
+		<action name="changePass" class="com.bank.action.ChangePasswordAction" method="execute">
+			<result name="input">ChangePassword.jsp</result>
+			<result name="success" type="redirect">accountSummary</result>
+		</action>
+
+		<action name="addBene" class="com.bank.action.AddBeneficieryAction" method="execute">
+			<result name="input">AddBene.jsp</result>
+			<result name="success" type="redirect">accountSummary</result>
+		</action>
+
+		<action name="benePay" class="com.bank.action.BenePayAction" method="execute">
+			<result name ="success">BenePay.jsp</result>
+		</action>
+
+		<action name="quickPay" class="com.bank.action.QuickPayAction" method="execute">
+			<result name="input">quickPay.jsp</result>
+			<result name="success" type="redirect">accountSummary</result>
+		</action>
+
+		<action name="applyLoan" class="com.bank.action.ApplyLoanAction" method="execute">
+			<interceptor-ref name="loanCheck"/>
+			<result name="success" type="redirectAction">accountSummary</result>
+			<result name="input">applyLoan.jsp</result>
+			<result name="exceed">loanExceed.html</result>
+		</action>
+
+		<action name="applyDepositAccount" class="com.bank.action.DepositApplicationAction" method="execute">
+			<result name="input">DepositApplication.jsp</result>
+			<result name="success" type="redirect">accountSummary</result>
+		</action>
+
+		<action name="payLoan" class="com.bank.action.PayLoanAction" method="execute">
+			<result name="input">payLoan.jsp</result>
+			<result name="success" type="redirect">accountSummary</result>
+		</action>
+
+		<action name="fdrdWithdraw" class="com.bank.action.FdRdWithdwawAction" method="execute">
+			<result name="input">FdRdWithdraw.jsp</result>
+			<result name="success" type="redirect">accountSummary</result>
+		</action>
+
+		<action name="viewLoans" class="com.bank.action.ViewLoanAction" method="execute">
+			<result name="success">viewLoanList.jsp</result>
+		</action>
+
+		<action name="viewDeposits" class="com.bank.action.ViewDepositListAction" method="execute">
+			<result name="success">ViewDepositAccounts.jsp</result>
+		</action>
+
+		<action name="logout" class="com.bank.action.LogoutAction" method="execute"/>
+		
+
+	</package>
+ 
+</struts>
